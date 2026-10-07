@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Robotics Workshop | Admin Dashboard</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#080b12;
+  color:#fff;
+  min-height:100vh;
+  padding:20px;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+h1{
+  font-size:26px;
+}
+
+.subtitle{
+  color:#9aa4b5;
+  margin-top:5px;
+}
+
+button{
+  border:none;
+  border-radius:10px;
+  padding:12px 18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+#loginBtn{
+  background:#4285f4;
+  color:white;
+}
+
+#logoutBtn{
+  display:none;
+  background:#ef4444;
+  color:white;
+}
+
+.card{
+  background:#111722;
+  border:1px solid #263044;
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:20px;
+}
+
+#loginSection{
+  max-width:500px;
+  margin:80px auto;
+  text-align:center;
+}
+
+#loginSection p{
+  color:#9aa4b5;
+  margin:15px 0 25px;
+}
+
+#adminSection{
+  display:none;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.stat{
+  background:#111722;
+  border:1px solid #263044;
+  border-radius:14px;
+  padding:20px;
+}
+
+.stat p{
+  color:#9aa4b5;
+}
+
+.stat h2{
+  font-size:30px;
+  margin-top:8px;
+}
+
+.search{
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #34405a;
+  background:#080b12;
+  color:white;
+  outline:none;
+  margin-bottom:18px;
+}
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  min-width:750px;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:13px;
+  border-bottom:1px solid #263044;
+  text-align:left;
+}
+
+th{
+  color:#8fb3ff;
+}
+
+.empty{
+  text-align:center;
+  padding:30px;
+  color:#9aa4b5;
+}
+
+#status{
+  margin-top:15px;
+  color:#ffb84d;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+  <div>
+    <h1>🤖 Robotics Workshop</h1>
+    <p class="subtitle">Admin Dashboard</p>
+  </div>
+
+  <button id="logoutBtn">Logout</button>
+</header>
+
+
+<!-- LOGIN -->
+
+<div id="loginSection" class="card">
+
+  <h2>Admin Login</h2>
+
+  <p>
+    Sign in with your authorised Google account.
+  </p>
+
+  <button id="loginBtn">
+    Continue with Google
+  </button>
+
+  <div id="status"></div>
+
+</div>
+
+
+<!-- ADMIN DASHBOARD -->
+
+<div id="adminSection">
+
+  <div class="stats">
+
+    <div class="stat">
+      <p>Total Registrations</p>
+      <h2 id="totalCount">0</h2>
+    </div>
+
+    <div class="stat">
+      <p>Workshop Date</p>
+      <h2 style="font-size:20px;">
+        16/10/2026
+      </h2>
+    </div>
+
+    <div class="stat">
+      <p>Registration Fee</p>
+      <h2 style="font-size:20px;">
+        ₹50
+      </h2>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <input
+      id="searchBox"
+      class="search"
+      type="text"
+      placeholder="Search name, PIN, branch or UTR..."
+    >
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>PIN</th>
+            <th>Branch</th>
+            <th>UTR</th>
+            <th>Screenshot</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+
+        <tbody id="registrationTable">
+
+          <tr>
+            <td colspan="6" class="empty">
+              Loading registrations...
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyBJK8-rFyqUSvtvTPmdKaEX3mvl17Fqt4U",
+
+  authDomain:
+    "robotics-workshop-1da23.firebaseapp.com",
+
+  projectId:
+    "robotics-workshop-1da23",
+
+  storageBucket:
+    "robotics-workshop-1da23.firebasestorage.app",
+
+  messagingSenderId:
+    "925130803484",
+
+  appId:
+    "1:925130803484:web:5b8c157f2f8c2af366d2d9",
+
+  measurementId:
+    "G-8VLD280DEV"
+};
+
+
+/* INITIALIZE FIREBASE */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+const provider = new GoogleAuthProvider();
+
+
+/* ELEMENTS */
+
+const loginBtn =
+  document.getElementById("loginBtn");
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
+
+const loginSection =
+  document.getElementById("loginSection");
+
+const adminSection =
+  document.getElementById("adminSection");
+
+const status =
+  document.getElementById("status");
+
+const table =
+  document.getElementById("registrationTable");
+
+const totalCount =
+  document.getElementById("totalCount");
+
+const searchBox =
+  document.getElementById("searchBox");
+
+
+let registrations = [];
+
+
+/* GOOGLE LOGIN */
+
+loginBtn.addEventListener("click", async () => {
+
+  try {
+
+    status.textContent =
+      "Opening Google login...";
+
+    await signInWithPopup(
+      auth,
+      provider
+    );
+
+  } catch(error) {
+
+    console.error(error);
+
+    status.textContent =
+      "Login failed: " + error.message;
+
+  }
+
+});
+
+
+/* LOGOUT */
+
+logoutBtn.addEventListener(
+  "click",
+  async () => {
+
+    await signOut(auth);
+
+  }
+);
+
+
+/* AUTH STATE */
+
+onAuthStateChanged(
+  auth,
+  async (user) => {
+
+    if(user){
+
+      loginSection.style.display =
+        "none";
+
+      adminSection.style.display =
+        "block";
+
+      logoutBtn.style.display =
+        "block";
+
+      await loadRegistrations();
+
+    }else{
+
+      loginSection.style.display =
+        "block";
+
+      adminSection.style.display =
+        "none";
+
+      logoutBtn.style.display =
+        "none";
+
+    }
+
+  }
+);
+
+
+/* LOAD REGISTRATIONS */
+
+async function loadRegistrations(){
+
+  try{
+
+    const snapshot =
+      await getDocs(
+        collection(
+          db,
+          "registrations"
+        )
+      );
+
+    registrations = [];
+
+    snapshot.forEach(
+      (doc) => {
+
+        registrations.push({
+
+          id: doc.id,
+
+          ...doc.data()
+
+        });
+
+      }
+    );
+
+
+    /* NEWEST FIRST */
+
+    registrations.sort(
+      (a,b) => {
+
+        const aTime =
+          a.createdAt?.toMillis?.() || 0;
+
+        const bTime =
+          b.createdAt?.toMillis?.() || 0;
+
+        return bTime - aTime;
+
+      }
+    );
+
+
+    totalCount.textContent =
+      registrations.length;
+
+    displayRegistrations(
+      registrations
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    table.innerHTML = `
+      <tr>
+        <td colspan="6" class="empty">
+          Unable to load registrations.
+        </td>
+      </tr>
+    `;
+
+  }
+
+}
+
+
+/* DISPLAY TABLE */
+
+function displayRegistrations(data){
+
+  if(data.length === 0){
+
+    table.innerHTML = `
+      <tr>
+        <td colspan="6" class="empty">
+          No registrations found.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  table.innerHTML =
+    data.map(item => {
+
+      let date = "";
+
+      if(item.createdAt){
+
+        try{
+
+          date =
+            item.createdAt
+              .toDate()
+              .toLocaleString();
+
+        }catch(error){}
+
+      }
+
+
+      return `
+        <tr>
+
+          <td>
+            ${item.name || ""}
+          </td>
+
+          <td>
+            ${item.pin || ""}
+          </td>
+
+          <td>
+            ${item.branch || ""}
+          </td>
+
+          <td>
+            ${item.utr || ""}
+          </td>
+
+          <td>
+            ${item.screenshotName || "Not uploaded"}
+          </td>
+
+          <td>
+            ${date}
+          </td>
+
+        </tr>
+      `;
+
+    }).join("");
+
+}
+
+
+/* SEARCH */
+
+searchBox.addEventListener(
+  "input",
+  () => {
+
+    const text =
+      searchBox.value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+      registrations.filter(item => {
+
+        return (
+
+          String(
+            item.name || ""
+          )
+          .toLowerCase()
+          .includes(text)
+
+          ||
+
+          String(
+            item.pin || ""
+          )
+          .toLowerCase()
+          .includes(text)
+
+          ||
+
+          String(
+            item.branch || ""
+          )
+          .toLowerCase()
+          .includes(text)
+
+          ||
+
+          String(
+            item.utr || ""
+          )
+          .toLowerCase()
+          .includes(text)
+
+        );
+
+      });
+
+
+    displayRegistrations(
+      filtered
+    );
+
+  }
+);
+
+</script>
+
+</body>
+  </html>
