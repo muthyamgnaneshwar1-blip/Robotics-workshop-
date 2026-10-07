@@ -1,282 +1,924 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Robotics Workshop | GIOE</title>
+<title>Robotics Workshop 2026 | GIOE College</title>
+
+<meta name="description"
+content="Robotics Workshop 2026 for Diploma C26 First Year Students at GIOE College, East Marredpally.">
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-    font-family:Arial, sans-serif;
-    background:linear-gradient(135deg,#050816,#111a35);
-    color:white;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#05080f;
+    color:#f4f8ff;
+    overflow-x:hidden;
 }
 
-.container{
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+        linear-gradient(rgba(0,200,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,200,255,.035) 1px,transparent 1px);
+    background-size:40px 40px;
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    top:-200px;
+    right:-180px;
+    background:rgba(0,210,255,.12);
+    filter:blur(100px);
+    border-radius:50%;
+    z-index:-1;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(18px);
+    background:rgba(5,8,15,.78);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav-inner{
     width:92%;
-    max-width:900px;
+    max-width:1100px;
     margin:auto;
+    height:68px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-.hero{
-    text-align:center;
-    padding:45px 15px 25px;
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:bold;
+    letter-spacing:.5px;
 }
 
-.robot{
-    font-size:65px;
+.logo-icon{
+    width:38px;
+    height:38px;
+    border:1px solid #25d9ff;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,210,255,.08);
+    font-size:20px;
 }
 
-.badge{
-    display:inline-block;
-    background:#182342;
-    border:1px solid #4c5d8c;
-    padding:8px 15px;
-    border-radius:30px;
-    color:#61e7ff;
-    font-size:13px;
+.logo span{
+    color:#55ddff;
+}
+
+.nav-btn{
+    text-decoration:none;
+    color:#061018;
+    background:#53dcff;
+    padding:10px 17px;
+    border-radius:9px;
+    font-size:14px;
     font-weight:bold;
 }
 
-h1{
-    font-size:42px;
-    margin:15px 0;
-    background:linear-gradient(90deg,#4eeaff,#a78bfa);
-    -webkit-background-clip:text;
-    color:transparent;
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:680px;
+    display:flex;
+    align-items:center;
+    padding:70px 0;
+    position:relative;
 }
 
-.subtitle{
-    color:#b7c0d6;
-    line-height:1.6;
-}
-
-.info{
+.hero-container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:1.25fr .75fr;
+    gap:50px;
+    align-items:center;
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 13px;
+    border-radius:30px;
+    border:1px solid rgba(80,220,255,.3);
+    background:rgba(0,210,255,.07);
+    color:#63ddff;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+    background:#45f3a1;
+    border-radius:50%;
+    box-shadow:0 0 12px #45f3a1;
+}
+
+.hero h1{
+    margin-top:20px;
+    font-size:clamp(42px,7vw,76px);
+    line-height:.98;
+    letter-spacing:-3px;
+}
+
+.hero h1 span{
+    color:#55ddff;
+}
+
+.hero-text{
+    max-width:650px;
+    margin-top:22px;
+    color:#9da9bd;
+    font-size:18px;
+    line-height:1.7;
+}
+
+.hero-actions{
+    display:flex;
     gap:12px;
     margin-top:30px;
+    flex-wrap:wrap;
 }
 
-.info-box{
-    background:#111a30;
-    border:1px solid #293755;
-    border-radius:15px;
-    padding:18px 10px;
+.primary-btn,
+.secondary-btn{
+    text-decoration:none;
+    padding:15px 22px;
+    border-radius:10px;
+    font-weight:bold;
 }
 
-.info-box strong{
+.primary-btn{
+    color:#031018;
+    background:#55ddff;
+    box-shadow:0 0 30px rgba(85,221,255,.15);
+}
+
+.secondary-btn{
+    color:white;
+    border:1px solid #34445d;
+    background:#0b111d;
+}
+
+.hero-info{
+    margin-top:32px;
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.hero-info-item small{
     display:block;
+    color:#65748d;
+    margin-bottom:5px;
+}
+
+.hero-info-item strong{
+    font-size:15px;
+}
+
+/* ROBOT VISUAL */
+
+.robot-panel{
+    min-height:390px;
+    border:1px solid #26344a;
+    background:
+        radial-gradient(circle at center,rgba(0,220,255,.12),transparent 50%),
+        rgba(9,15,27,.8);
+    border-radius:25px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 20px 70px rgba(0,0,0,.3);
+}
+
+.robot-panel::before{
+    content:"";
+    position:absolute;
+    width:240px;
+    height:240px;
+    border:1px dashed rgba(80,220,255,.25);
+    border-radius:50%;
+}
+
+.robot-panel::after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border:1px solid rgba(80,220,255,.08);
+    border-radius:50%;
+}
+
+.robot{
+    font-size:130px;
+    filter:drop-shadow(0 0 25px rgba(75,220,255,.45));
+    z-index:2;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    padding:45px 0;
+}
+
+.section-heading{
+    margin-bottom:25px;
+}
+
+.section-heading .mini{
+    color:#55ddff;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.section-heading h2{
+    font-size:32px;
     margin-top:7px;
 }
 
-.info-box small{
-    color:#9da8c0;
+.section-heading p{
+    color:#8997ad;
+    margin-top:9px;
 }
 
-.card{
-    background:#10182b;
-    border:1px solid #293755;
+/* =========================
+   INFO GRID
+========================= */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.info-card{
+    padding:23px;
+    background:linear-gradient(145deg,#0d1524,#090f1b);
+    border:1px solid #233149;
+    border-radius:17px;
+}
+
+.info-icon{
+    font-size:25px;
+}
+
+.info-card h3{
+    margin-top:15px;
+    font-size:17px;
+}
+
+.info-card p{
+    color:#8492a8;
+    margin-top:6px;
+    line-height:1.5;
+}
+
+/* =========================
+   REGISTRATION
+========================= */
+
+.registration-section{
+    padding:70px 0;
+}
+
+.registration-layout{
+    display:grid;
+    grid-template-columns:.85fr 1.15fr;
+    gap:20px;
+    align-items:start;
+}
+
+/* PAYMENT CARD */
+
+.payment-card{
+    background:linear-gradient(145deg,#0c1725,#080e18);
+    border:1px solid #26364d;
     border-radius:20px;
     padding:25px;
+    position:sticky;
+    top:90px;
+}
+
+.payment-card h2{
+    font-size:22px;
+}
+
+.payment-sub{
+    color:#8997aa;
+    margin-top:8px;
+    line-height:1.5;
+}
+
+.price{
+    font-size:45px;
+    font-weight:bold;
+    color:#55ddff;
     margin:20px 0;
 }
 
-.card h2{
-    margin-bottom:8px;
+.qr-wrap{
+    background:white;
+    padding:10px;
+    border-radius:14px;
+    width:max-content;
+    max-width:100%;
+    margin:auto;
 }
 
-.description{
-    color:#aeb8cd;
+.qr{
+    width:230px;
+    max-width:100%;
+    display:block;
+}
+
+.payment-note{
+    margin-top:20px;
+    padding:15px;
+    border-radius:12px;
+    background:#0a111e;
+    border:1px solid #223149;
+    color:#9aa7bb;
     line-height:1.6;
+    font-size:14px;
 }
 
-.form{
+/* FORM CARD */
+
+.form-card{
+    background:linear-gradient(145deg,#0d1524,#090f1b);
+    border:1px solid #26364d;
+    border-radius:20px;
+    padding:30px;
+}
+
+.form-card h2{
+    font-size:25px;
+}
+
+.form-card > p{
+    color:#8997aa;
+    margin-top:7px;
+}
+
+.form-group{
     margin-top:20px;
 }
 
 label{
     display:block;
-    margin:15px 0 7px;
+    margin-bottom:8px;
+    font-size:14px;
     font-weight:bold;
+    color:#dbe4f1;
 }
 
-input,select{
+input,
+select{
     width:100%;
-    padding:14px;
+    padding:14px 15px;
     border-radius:10px;
-    border:1px solid #3a4867;
-    background:#080e1d;
+    border:1px solid #2d3c54;
+    outline:none;
+    background:#060b14;
     color:white;
-    font-size:16px;
+    font-size:15px;
+    transition:.2s;
 }
 
-.payment{
-    text-align:center;
-    margin-top:25px;
+input:focus,
+select:focus{
+    border-color:#55ddff;
+    box-shadow:0 0 0 3px rgba(85,221,255,.08);
 }
 
-.payment h2{
-    margin-bottom:5px;
+input::placeholder{
+    color:#56657b;
 }
 
-.amount{
-    color:#5ee7ff;
-    font-size:32px;
-    font-weight:bold;
-    margin:15px;
+.file-box{
+    padding:13px;
+    border:1px dashed #354760;
+    border-radius:10px;
+    background:#060b14;
 }
 
-.qr{
-    width:280px;
-    max-width:90%;
-    background:white;
-    padding:8px;
-    border-radius:15px;
+input[type="file"]{
+    border:0;
+    padding:0;
+    background:transparent;
 }
 
-.instructions{
-    text-align:left;
-    max-width:400px;
-    margin:20px auto;
-    color:#c5cee1;
-    line-height:1.8;
-}
-
-button{
+.submit-btn{
     width:100%;
+    border:0;
     padding:16px;
     margin-top:25px;
-    border:0;
-    border-radius:12px;
-    background:linear-gradient(90deg,#4eeaff,#8b5cf6);
-    color:#06101a;
-    font-size:17px;
+    border-radius:11px;
+    background:#55ddff;
+    color:#031018;
+    font-size:16px;
     font-weight:bold;
     cursor:pointer;
+    transition:.2s;
 }
 
-button:hover{
-    opacity:.9;
+.submit-btn:hover{
+    transform:translateY(-1px);
+    box-shadow:0 8px 25px rgba(85,221,255,.15);
+}
+
+.submit-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.form-note{
+    text-align:center;
+    color:#66758b;
+    font-size:12px;
+    margin-top:12px;
+}
+
+/* =========================
+   SUCCESS / ERROR
+========================= */
+
+.message{
+    display:none;
+    padding:18px;
+    border-radius:13px;
+    margin-top:20px;
+    line-height:1.5;
 }
 
 .success{
-    display:none;
-    text-align:center;
-    margin-top:20px;
-    padding:20px;
-    border-radius:15px;
-    background:#09241f;
-    border:1px solid #2e7868;
+    background:#08231c;
+    border:1px solid #1f775d;
+    color:#8ff0ca;
 }
+
+.error{
+    background:#2a1014;
+    border:1px solid #863640;
+    color:#ffabb3;
+}
+
+/* =========================
+   WORKSHOP DETAILS
+========================= */
+
+.details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.detail-card{
+    padding:25px;
+    border-radius:18px;
+    border:1px solid #25344b;
+    background:#0b121e;
+}
+
+.detail-card h3{
+    margin-bottom:12px;
+}
+
+.detail-card p,
+.detail-card li{
+    color:#8d9aaf;
+    line-height:1.7;
+}
+
+.detail-card ul{
+    padding-left:20px;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
+    margin-top:50px;
+    border-top:1px solid #182335;
+    padding:30px 15px;
     text-align:center;
-    color:#78849e;
-    padding:30px 10px;
+    color:#627087;
+    font-size:13px;
 }
 
-@media(max-width:700px){
-    h1{
-        font-size:34px;
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+    .hero{
+        min-height:auto;
+        padding:55px 0 35px;
     }
 
-    .info{
+    .hero-container{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .robot-panel{
+        min-height:280px;
+    }
+
+    .robot{
+        font-size:95px;
+    }
+
+    .info-grid{
         grid-template-columns:1fr;
     }
 
-    .card{
+    .registration-layout{
+        grid-template-columns:1fr;
+    }
+
+    .payment-card{
+        position:static;
+    }
+
+    .details{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .nav-inner{
+        height:60px;
+    }
+
+    .logo-text{
+        font-size:14px;
+    }
+
+    .nav-btn{
+        padding:9px 12px;
+        font-size:12px;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .hero-text{
+        font-size:15px;
+    }
+
+    .hero-info{
+        gap:15px;
+    }
+
+    .form-card,
+    .payment-card{
         padding:20px;
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+<div class="nav-inner">
+
+<div class="logo">
+
+<div class="logo-icon">🤖</div>
+
+<div class="logo-text">
+ROBOTICS <span>WORKSHOP</span>
+</div>
+
+</div>
+
+<a href="#register" class="nav-btn">
+REGISTER
+</a>
+
+</div>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
-<div class="container">
+<div class="hero-container">
 
-<div class="badge">
-DIPLOMA C26 • 1st YEAR STUDENTS
+<div>
+
+<div class="eyebrow">
+<span class="status-dot"></span>
+REGISTRATION OPEN • C26
 </div>
+
+<h1>
+Build.<br>
+Code.<br>
+<span>Innovate.</span>
+</h1>
+
+<p class="hero-text">
+
+A hands-on Robotics Workshop designed for
+Diploma C26 First Year Students to explore
+robotics, electronics and practical technology.
+
+</p>
+
+<div class="hero-actions">
+
+<a href="#register" class="primary-btn">
+🚀 Register Now
+</a>
+
+<a href="#about" class="secondary-btn">
+Explore Workshop
+</a>
+
+</div>
+
+<div class="hero-info">
+
+<div class="hero-info-item">
+<small>DATE</small>
+<strong>16 October 2026</strong>
+</div>
+
+<div class="hero-info-item">
+<small>VENUE</small>
+<strong>GIOE College</strong>
+</div>
+
+<div class="hero-info-item">
+<small>FEE</small>
+<strong>₹50</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="robot-panel">
 
 <div class="robot">
 🤖
 </div>
 
-<h1>Robotics Workshop</h1>
-
-<p class="subtitle">
-Hands-on Robotics Workshop specially organized for
-Diploma C26 First Year Students.
-</p>
-
-<div class="info">
-
-<div class="info-box">
-📅
-<strong>16 October 2026</strong>
-<small>Workshop Date</small>
-</div>
-
-<div class="info-box">
-🏫
-<strong>GIOE College</strong>
-<small>East Marredpally</small>
-</div>
-
-<div class="info-box">
-💰
-<strong>₹50</strong>
-<small>Registration Fee</small>
-</div>
-
 </div>
 
 </div>
 
 </section>
 
+
+<!-- =========================
+     WORKSHOP HIGHLIGHTS
+========================= -->
+
+<section class="section">
 
 <div class="container">
 
-<!-- VENUE -->
-<section class="card">
+<div class="section-heading">
 
-<h2>📍 Workshop Venue</h2>
+<div class="mini">
+Workshop Overview
+</div>
 
-<p class="description">
-<strong>Vidhyan Vedik Auditorium</strong><br>
-GIOE College,<br>
-East Marredpally, Secunderabad,<br>
-Telangana.
+<h2>Everything starts with curiosity.</h2>
+
+<p>
+Get practical exposure to the fundamentals of robotics.
 </p>
+
+</div>
+
+
+<div class="info-grid">
+
+<div class="info-card">
+
+<div class="info-icon">⚙️</div>
+
+<h3>Robotics Basics</h3>
+
+<p>
+Understand the fundamental concepts behind
+modern robotic systems.
+</p>
+
+</div>
+
+
+<div class="info-card">
+
+<div class="info-icon">💻</div>
+
+<h3>Technology</h3>
+
+<p>
+Explore electronics, controllers and basic
+robotic programming concepts.
+</p>
+
+</div>
+
+
+<div class="info-card">
+
+<div class="info-icon">🛠️</div>
+
+<h3>Hands-on Learning</h3>
+
+<p>
+Learn through practical demonstrations and
+real-world applications.
+</p>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 
-<!-- REGISTRATION -->
-<section class="card">
+<!-- =========================
+     REGISTRATION
+========================= -->
 
-<h2>📝 Registration Form</h2>
+<section class="registration-section" id="register">
 
-<p class="description">
-Fill in your details carefully before submitting your application.
+<div class="container">
+
+<div class="section-heading">
+
+<div class="mini">
+Secure Your Seat
+</div>
+
+<h2>Workshop Registration</h2>
+
+<p>
+Complete your details and payment to register.
 </p>
+
+</div>
+
+
+<div class="registration-layout">
+
+
+<!-- PAYMENT -->
+
+<div class="payment-card">
+
+<h2>💳 Registration Fee</h2>
+
+<p class="payment-sub">
+Scan the QR code using PhonePe and pay exactly
+the registration fee.
+</p>
+
+<div class="price">
+₹50
+</div>
+
+<div class="qr-wrap">
+
+<img
+src="phonepe-qr.png"
+class="qr"
+alt="PhonePe payment QR code"
+>
+
+</div>
+
+<div class="payment-note">
+
+<b>Payment Steps</b>
+
+<br><br>
+
+1. Open PhonePe<br>
+2. Scan the QR code<br>
+3. Pay ₹50<br>
+4. Copy your Transaction ID / UTR<br>
+5. Enter the UTR in the registration form
+
+</div>
+
+</div>
+
+
+<!-- FORM -->
+
+<div class="form-card">
+
+<h2>📝 Student Details</h2>
+
+<p>
+Enter your details exactly as they appear in your
+college records.
+</p>
+
 
 <form id="registrationForm">
 
-<label>Full Name *</label>
+
+<div class="form-group">
+
+<label for="name">
+Full Name *
+</label>
 
 <input
 type="text"
@@ -285,83 +927,74 @@ placeholder="Enter your full name"
 required
 >
 
+</div>
 
-<label>PIN Number *</label>
+
+<div class="form-group">
+
+<label for="pin">
+PIN Number *
+</label>
 
 <input
 type="text"
 id="pin"
-placeholder="Enter your PIN number"
+placeholder="Enter your college PIN"
 required
 >
 
+</div>
 
-<label>Branch *</label>
+
+<div class="form-group">
+
+<label for="branch">
+Branch *
+</label>
 
 <select id="branch" required>
 
-<option value="">Select Branch</option>
+<option value="">
+Select your branch
+</option>
 
-<option>AI</option>
-<option>CSE</option>
-<option>CPS</option>
-<option>ES</option>
-<option>EI</option>
-<option>ECE</option>
-<option>EV</option>
-<option>BM</option>
+<option value="AI">AI</option>
+<option value="CSE">CSE</option>
+<option value="CPS">CPS</option>
+<option value="ES">ES</option>
+<option value="EI">EI</option>
+<option value="ECE">ECE</option>
+<option value="EV">EV</option>
+<option value="BM">BM</option>
 
 </select>
 
-
-<!-- PAYMENT -->
-
-<div class="payment">
-
-<h2>💳 Pay Registration Fee</h2>
-
-<p class="description">
-Scan the PhonePe QR code and pay the registration fee.
-</p>
-
-<div class="amount">
-₹50
-</div>
-
-<img
-src="phonepe-qr.png"
-class="qr"
-alt="PhonePe Payment QR Code"
->
-
-<div class="instructions">
-
-<b>Payment Steps:</b>
-
-<ol>
-<li>Open PhonePe</li>
-<li>Scan the QR code</li>
-<li>Pay exactly ₹50</li>
-<li>Copy your Transaction ID / UTR</li>
-<li>Enter it below</li>
-</ol>
-
-</div>
-
 </div>
 
 
-<label>Transaction ID / UTR *</label>
+<div class="form-group">
+
+<label for="utr">
+Transaction ID / UTR *
+</label>
 
 <input
 type="text"
 id="utr"
-placeholder="Enter payment transaction ID"
+placeholder="Enter payment UTR"
 required
 >
 
+</div>
 
-<label>Payment Screenshot *</label>
+
+<div class="form-group">
+
+<label for="screenshot">
+Payment Screenshot *
+</label>
+
+<div class="file-box">
 
 <input
 type="file"
@@ -370,60 +1003,131 @@ accept="image/*"
 required
 >
 
+</div>
 
-<button type="submit">
+</div>
+
+
+<button
+type="submit"
+class="submit-btn"
+id="submitBtn"
+>
 🚀 Submit Registration
 </button>
+
+<p class="form-note">
+Please verify your details before submitting.
+</p>
 
 </form>
 
 
-<div class="success" id="success">
+<div
+class="message success"
+id="success"
+>
+<b>✅ Registration submitted successfully!</b>
+<br><br>
+Your details have been received. Please keep your
+payment UTR safely for verification.
+</div>
 
-<h2>✅ Registration Submitted!</h2>
 
-<p>
-Thank you for registering for the Robotics Workshop.
-</p>
+<div
+class="message error"
+id="error"
+>
+<b>❌ Registration failed.</b>
+<br><br>
+Please check your internet connection and try again.
+</div>
 
-<p style="margin-top:8px;color:#aab5ca">
-Please keep your payment transaction details safely.
-</p>
+</div>
+
+</div>
 
 </div>
 
 </section>
 
 
-<!-- WORKSHOP INFO -->
+<!-- =========================
+     ABOUT
+========================= -->
 
-<section class="card">
+<section class="section" id="about">
 
-<h2>🤖 About the Workshop</h2>
+<div class="container">
 
-<p class="description">
+<div class="section-heading">
 
-This Robotics Workshop is designed for Diploma C26
-first-year students to gain practical exposure to
-robotics, electronics and basic robotic systems.
+<div class="mini">
+Event Information
+</div>
+
+<h2>About the Workshop</h2>
+
+</div>
+
+
+<div class="details">
+
+
+<div class="detail-card">
+
+<h3>📍 Venue</h3>
+
+<p>
+
+<strong>Vidhyan Vedik Auditorium</strong><br>
+GIOE College<br>
+East Marredpally, Secunderabad<br>
+Telangana
+
+</p>
+
+</div>
+
+
+<div class="detail-card">
+
+<h3>🎓 Eligibility</h3>
+
+<p>
+
+Diploma C26 First Year Students
 
 </p>
 
 <br>
 
-<p class="description">
+<ul>
 
-🎓 <b>Eligibility:</b> Diploma C26 First Year Students<br>
-💰 <b>Registration:</b> ₹50<br>
-📅 <b>Date:</b> 16 October 2026<br>
-📍 <b>Venue:</b> Vidhyan Vedik Auditorium
+<li>AI</li>
+<li>CSE</li>
+<li>CPS</li>
+<li>ES</li>
+<li>EI</li>
+<li>ECE</li>
+<li>EV</li>
+<li>BM</li>
 
-</p>
-
-</section>
+</ul>
 
 </div>
 
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
@@ -433,23 +1137,164 @@ GIOE College • Secunderabad
 </footer>
 
 
-<script>
+<!-- =========================
+     FIREBASE
+========================= -->
 
-document
-.getElementById("registrationForm")
-.addEventListener("submit",function(event){
+<script type="module">
 
-event.preventDefault();
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-document
-.getElementById("success")
-.style.display="block";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-document
-.getElementById("success")
-.scrollIntoView({
-behavior:"smooth"
-});
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyBJK8-rFyqUSvtvTPmdKaEX3mvl17Fqt4U",
+
+    authDomain:
+    "robotics-workshop-1da23.firebaseapp.com",
+
+    projectId:
+    "robotics-workshop-1da23",
+
+    storageBucket:
+    "robotics-workshop-1da23.firebasestorage.app",
+
+    messagingSenderId:
+    "925130803484",
+
+    appId:
+    "1:925130803484:web:5b8c157f2f8c2af366d2d9",
+
+    measurementId:
+    "G-8VLD280DEV"
+
+};
+
+
+/* INITIALIZE FIREBASE */
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+/* FORM */
+
+const form =
+document.getElementById("registrationForm");
+
+const submitBtn =
+document.getElementById("submitBtn");
+
+const success =
+document.getElementById("success");
+
+const error =
+document.getElementById("error");
+
+
+form.addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+    success.style.display = "none";
+    error.style.display = "none";
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "⏳ Submitting...";
+
+
+    const name =
+    document.getElementById("name").value.trim();
+
+    const pin =
+    document.getElementById("pin").value.trim();
+
+    const branch =
+    document.getElementById("branch").value;
+
+    const utr =
+    document.getElementById("utr").value.trim();
+
+    const screenshotInput =
+    document.getElementById("screenshot");
+
+    const screenshotFile =
+    screenshotInput.files[0];
+
+
+    try{
+
+        await addDoc(
+            collection(db,"registrations"),
+            {
+
+                name: name,
+
+                pin: pin,
+
+                branch: branch,
+
+                utr: utr,
+
+                screenshotName:
+                screenshotFile
+                ? screenshotFile.name
+                : "",
+
+                createdAt:
+                serverTimestamp()
+
+            }
+        );
+
+
+        success.style.display = "block";
+
+        success.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+        form.reset();
+
+    }
+
+    catch(errorObject){
+
+        console.error(
+            "Firebase error:",
+            errorObject
+        );
+
+        error.style.display = "block";
+
+        error.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+    }
+
+    finally{
+
+        submitBtn.disabled = false;
+
+        submitBtn.textContent =
+        "🚀 Submit Registration";
+
+    }
 
 });
 
