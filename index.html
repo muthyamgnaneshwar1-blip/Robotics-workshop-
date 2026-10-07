@@ -1234,32 +1234,52 @@ form.addEventListener("submit", async function(event){
     screenshotInput.files[0];
 
 
-    try{
+try{
 
-        await addDoc(
-            collection(db,"registrations"),
-            {
+  const docRef = await addDoc(
+    collection(db,"registrations"),
+    {
+      name: name,
+      pin: pin,
+      branch: branch,
+      utr: utr,
+      screenshotName: screenshotFile
+        ? screenshotFile.name
+        : "",
+      createdAt: serverTimestamp()
+    }
+  );
 
-                name: name,
+  // Upload payment screenshot to Google Drive
+  if(screenshotFile){
 
-                pin: pin,
+    const reader = new FileReader();
 
-                branch: branch,
+    reader.onload = async function(){
 
-                utr: utr,
+      const base64Data = reader.result.split(",")[1];
 
-                screenshotName:
-                screenshotFile
-                ? screenshotFile.name
-                : "",
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbylDnzHEciFZbYo1S_lZg1StHKGbAWbe_x6J1XnvxPOO6MvUMGOHEVYriq3OTkuGERL/exec",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            name: name,
+            pin: pin,
+            branch: branch,
+            utr: utr,
+            registrationId: docRef.id,
+            fileName: screenshotFile.name,
+            mimeType: screenshotFile.type,
+            fileData: base64Data
+          })
+        }
+      );
 
-                createdAt:
-                serverTimestamp()
+    };
 
-            }
-        );
-
-
+    reader.readAsDataURL(screenshotFile);
+  }
         success.style.display = "block";
 
         success.scrollIntoView({
