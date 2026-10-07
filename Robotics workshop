@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Robotics Workshop | GIOE</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#050816,#111a35);
+    color:white;
+}
+
+.container{
+    width:92%;
+    max-width:900px;
+    margin:auto;
+}
+
+.hero{
+    text-align:center;
+    padding:45px 15px 25px;
+}
+
+.robot{
+    font-size:65px;
+}
+
+.badge{
+    display:inline-block;
+    background:#182342;
+    border:1px solid #4c5d8c;
+    padding:8px 15px;
+    border-radius:30px;
+    color:#61e7ff;
+    font-size:13px;
+    font-weight:bold;
+}
+
+h1{
+    font-size:42px;
+    margin:15px 0;
+    background:linear-gradient(90deg,#4eeaff,#a78bfa);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.subtitle{
+    color:#b7c0d6;
+    line-height:1.6;
+}
+
+.info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:30px;
+}
+
+.info-box{
+    background:#111a30;
+    border:1px solid #293755;
+    border-radius:15px;
+    padding:18px 10px;
+}
+
+.info-box strong{
+    display:block;
+    margin-top:7px;
+}
+
+.info-box small{
+    color:#9da8c0;
+}
+
+.card{
+    background:#10182b;
+    border:1px solid #293755;
+    border-radius:20px;
+    padding:25px;
+    margin:20px 0;
+}
+
+.card h2{
+    margin-bottom:8px;
+}
+
+.description{
+    color:#aeb8cd;
+    line-height:1.6;
+}
+
+.form{
+    margin-top:20px;
+}
+
+label{
+    display:block;
+    margin:15px 0 7px;
+    font-weight:bold;
+}
+
+input,select{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #3a4867;
+    background:#080e1d;
+    color:white;
+    font-size:16px;
+}
+
+.payment{
+    text-align:center;
+    margin-top:25px;
+}
+
+.payment h2{
+    margin-bottom:5px;
+}
+
+.amount{
+    color:#5ee7ff;
+    font-size:32px;
+    font-weight:bold;
+    margin:15px;
+}
+
+.qr{
+    width:280px;
+    max-width:90%;
+    background:white;
+    padding:8px;
+    border-radius:15px;
+}
+
+.instructions{
+    text-align:left;
+    max-width:400px;
+    margin:20px auto;
+    color:#c5cee1;
+    line-height:1.8;
+}
+
+button{
+    width:100%;
+    padding:16px;
+    margin-top:25px;
+    border:0;
+    border-radius:12px;
+    background:linear-gradient(90deg,#4eeaff,#8b5cf6);
+    color:#06101a;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.success{
+    display:none;
+    text-align:center;
+    margin-top:20px;
+    padding:20px;
+    border-radius:15px;
+    background:#09241f;
+    border:1px solid #2e7868;
+}
+
+footer{
+    text-align:center;
+    color:#78849e;
+    padding:30px 10px;
+}
+
+@media(max-width:700px){
+    h1{
+        font-size:34px;
+    }
+
+    .info{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+
+<div class="container">
+
+<div class="badge">
+DIPLOMA C26 • 1st YEAR STUDENTS
+</div>
+
+<div class="robot">
+🤖
+</div>
+
+<h1>Robotics Workshop</h1>
+
+<p class="subtitle">
+Hands-on Robotics Workshop specially organized for
+Diploma C26 First Year Students.
+</p>
+
+<div class="info">
+
+<div class="info-box">
+📅
+<strong>16 October 2026</strong>
+<small>Workshop Date</small>
+</div>
+
+<div class="info-box">
+🏫
+<strong>GIOE College</strong>
+<small>East Marredpally</small>
+</div>
+
+<div class="info-box">
+💰
+<strong>₹50</strong>
+<small>Registration Fee</small>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="container">
+
+<!-- VENUE -->
+<section class="card">
+
+<h2>📍 Workshop Venue</h2>
+
+<p class="description">
+<strong>Vidhyan Vedik Auditorium</strong><br>
+GIOE College,<br>
+East Marredpally, Secunderabad,<br>
+Telangana.
+</p>
+
+</section>
+
+
+<!-- REGISTRATION -->
+<section class="card">
+
+<h2>📝 Registration Form</h2>
+
+<p class="description">
+Fill in your details carefully before submitting your application.
+</p>
+
+<form id="registrationForm">
+
+<label>Full Name *</label>
+
+<input
+type="text"
+id="name"
+placeholder="Enter your full name"
+required
+>
+
+
+<label>PIN Number *</label>
+
+<input
+type="text"
+id="pin"
+placeholder="Enter your PIN number"
+required
+>
+
+
+<label>Branch *</label>
+
+<select id="branch" required>
+
+<option value="">Select Branch</option>
+
+<option>AI</option>
+<option>CSE</option>
+<option>CPS</option>
+<option>ES</option>
+<option>EI</option>
+<option>ECE</option>
+<option>EV</option>
+<option>BM</option>
+
+</select>
+
+
+<!-- PAYMENT -->
+
+<div class="payment">
+
+<h2>💳 Pay Registration Fee</h2>
+
+<p class="description">
+Scan the PhonePe QR code and pay the registration fee.
+</p>
+
+<div class="amount">
+₹50
+</div>
+
+<img
+src="phonepe-qr.png"
+class="qr"
+alt="PhonePe Payment QR Code"
+>
+
+<div class="instructions">
+
+<b>Payment Steps:</b>
+
+<ol>
+<li>Open PhonePe</li>
+<li>Scan the QR code</li>
+<li>Pay exactly ₹50</li>
+<li>Copy your Transaction ID / UTR</li>
+<li>Enter it below</li>
+</ol>
+
+</div>
+
+</div>
+
+
+<label>Transaction ID / UTR *</label>
+
+<input
+type="text"
+id="utr"
+placeholder="Enter payment transaction ID"
+required
+>
+
+
+<label>Payment Screenshot *</label>
+
+<input
+type="file"
+id="screenshot"
+accept="image/*"
+required
+>
+
+
+<button type="submit">
+🚀 Submit Registration
+</button>
+
+</form>
+
+
+<div class="success" id="success">
+
+<h2>✅ Registration Submitted!</h2>
+
+<p>
+Thank you for registering for the Robotics Workshop.
+</p>
+
+<p style="margin-top:8px;color:#aab5ca">
+Please keep your payment transaction details safely.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- WORKSHOP INFO -->
+
+<section class="card">
+
+<h2>🤖 About the Workshop</h2>
+
+<p class="description">
+
+This Robotics Workshop is designed for Diploma C26
+first-year students to gain practical exposure to
+robotics, electronics and basic robotic systems.
+
+</p>
+
+<br>
+
+<p class="description">
+
+🎓 <b>Eligibility:</b> Diploma C26 First Year Students<br>
+💰 <b>Registration:</b> ₹50<br>
+📅 <b>Date:</b> 16 October 2026<br>
+📍 <b>Venue:</b> Vidhyan Vedik Auditorium
+
+</p>
+
+</section>
+
+</div>
+
+
+<footer>
+
+Robotics Workshop © 2026<br>
+GIOE College • Secunderabad
+
+</footer>
+
+
+<script>
+
+document
+.getElementById("registrationForm")
+.addEventListener("submit",function(event){
+
+event.preventDefault();
+
+document
+.getElementById("success")
+.style.display="block";
+
+document
+.getElementById("success")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+});
+
+</script>
+
+</body>
+</html>
