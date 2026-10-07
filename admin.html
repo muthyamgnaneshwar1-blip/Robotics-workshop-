@@ -149,6 +149,97 @@ th{
   margin-top:15px;
   color:#ffb84d;
 }
+  /* MOBILE ADMIN TABLE */
+
+@media (max-width: 700px){
+
+  body{
+    padding:12px;
+  }
+
+  .container{
+    width:100%;
+  }
+
+  header{
+    align-items:flex-start;
+  }
+
+  h1{
+    font-size:22px;
+  }
+
+  .card{
+    padding:15px;
+  }
+
+  .table-wrap{
+    overflow-x:visible;
+  }
+
+  table{
+    min-width:0;
+    width:100%;
+  }
+
+  thead{
+    display:none;
+  }
+
+  tbody,
+  tr,
+  td{
+    display:block;
+    width:100%;
+  }
+
+  tr{
+    background:#0b1019;
+    border:1px solid #263044;
+    border-radius:14px;
+    margin-bottom:15px;
+    padding:10px;
+  }
+
+  td{
+    border:none;
+    padding:8px 5px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    text-align:right;
+  }
+
+  td::before{
+    font-weight:bold;
+    color:#8fb3ff;
+    text-align:left;
+  }
+
+  td:nth-child(1)::before{
+    content:"Name";
+  }
+
+  td:nth-child(2)::before{
+    content:"PIN";
+  }
+
+  td:nth-child(3)::before{
+    content:"Branch";
+  }
+
+  td:nth-child(4)::before{
+    content:"UTR";
+  }
+
+  td:nth-child(5)::before{
+    content:"Screenshot";
+  }
+
+  td:nth-child(6)::before{
+    content:"Date";
+  }
+}
 </style>
 </head>
 
